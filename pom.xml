@@ -10,19 +10,25 @@
 	</parent>
 	<groupId>com.bravo</groupId>
 	<artifactId>bakery</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
 	<name>bakery</name>
 	<description>The delicius store</description>
 
 	<properties>
 		<java.version>1.8</java.version>
-			<start-class>pe.com.servex.omnibot.perseo.BakeryApplication</start-class>
+			<start-class>com.bravo.bakery.BakeryApplication</start-class>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

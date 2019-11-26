@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  
+  api:
+    container_name: app
+    build: 
+      context: src/main/resources/docker/app
+      args: 
+        - ENVIRONMENT
+    image: "image_bakery_app"
+    depends_on:
+      - db
+    ports:
+      - "18080:18080"
+    networks:
+      - bakery-net
+    volumes:
+      - /var/log/bakery/:/var/log/bakery/
+      - /home/diego/bakery/target:/app/target/
+    environment:
+      - ENVIRONMENT
+    restart: always
+
+  db:
+    container_name: db
+    build:
+      context: src/main/resources/docker/db
+      args: 
+        - MYSQL_ROOT_PASSWORD=Br4v0.
+        - MYSQL_USER=bakery-user
+        - MYSQL_PASSWORD=b4k3ry-p4ss
+        - MYSQL_DATABASE=bakery
+        - MYSQL_ALLOW_EMPTY_PASSWORD=no
+    image: "image_bakery_db"
+    ports:
+      - "13306:3306"
+    networks: 
+      - bakery-net
+    volumes:
+      - bakery-db-data:/var/lib/mysql
+    restart: always 
+
+volumes:
+  bakery-db-data:
+
+networks:
+  bakery-net:
