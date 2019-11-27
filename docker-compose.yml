@@ -5,7 +5,7 @@ services:
   api:
     container_name: app
     build: 
-      context: src/main/resources/docker/app
+      context: .
       args: 
         - ENVIRONMENT
     image: "image_bakery_app"
@@ -15,11 +15,6 @@ services:
       - "18080:18080"
     networks:
       - bakery-net
-    volumes:
-      - /var/log/bakery/:/var/log/bakery/
-      - /home/diego/bakery/target:/app/target/
-    environment:
-      - ENVIRONMENT
     restart: always
 
   db:
