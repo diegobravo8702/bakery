@@ -34,7 +34,8 @@ ENV SPRING_PROFILES_ACTIVE=$ENVIRONMENT
 RUN mkdir $APP_HOME
 
 #Create folder with application logs
-RUN mkdir $APP_LOGS
+RUN	mkdir $APP_LOGS && \
+	chmod 777 $APP_LOGS
 
 WORKDIR $APP_HOME
 #Copy executable jar file from the builder image
