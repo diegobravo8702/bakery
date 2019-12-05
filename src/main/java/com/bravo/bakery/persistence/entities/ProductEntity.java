@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.apache.log4j.Logger;
 import org.springframework.data.annotation.CreatedBy;
@@ -43,6 +44,9 @@ public class ProductEntity implements Serializable {
 	private String name;
 	private String description;
 	private BigDecimal price;
+
+	@Transient
+	private BigDecimal priceCOP;
 
 	private String image1;
 	private String image2;
@@ -159,6 +163,14 @@ public class ProductEntity implements Serializable {
 
 	public void setCreated_by(String created_by) {
 		this.created_by = created_by;
+	}
+
+	public BigDecimal getPriceCOP() {
+		return priceCOP;
+	}
+
+	public void setPriceCOP(BigDecimal priceCOP) {
+		this.priceCOP = priceCOP;
 	}
 
 }
