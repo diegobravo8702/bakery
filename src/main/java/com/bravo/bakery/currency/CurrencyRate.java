@@ -2,9 +2,6 @@ package com.bravo.bakery.currency;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -17,7 +14,9 @@ import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CurrencyRate {
 	private static final Logger log = Logger.getLogger(CurrencyRate.class);
 	// essential URL structure is built using constants
@@ -42,7 +41,7 @@ public class CurrencyRate {
 	 */
 
 	// sendLiveRequest() function is created to request and retrieve the data
-	public static BigDecimal convert(BigDecimal mountUSD) {
+	public BigDecimal convert(BigDecimal mountUSD) {
 		BigDecimal mountCOP = null;
 		Double currencyRateUSDCOP = null;
 		// The following line initializes the HttpGet Object with the URL in order to send a request
@@ -68,11 +67,11 @@ public class CurrencyRate {
 		} catch (JSONException e) {
 			log.error(e);
 		} finally {
-			try {
-				httpClient.close();
-			} catch (IOException e) {
-				log.error(e);
-			}
+//			try {
+//				httpClient.close();
+//			} catch (IOException e) {
+//				log.error(e);
+//			}
 		}
 		return mountCOP;
 	}
