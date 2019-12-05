@@ -46,7 +46,7 @@ public class CategoryEntity implements Serializable {
 	@CreatedBy
 	private String created_by;
 
-	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private List<ProductEntity> products;
 
