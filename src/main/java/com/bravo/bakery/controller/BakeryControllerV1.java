@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,9 +18,9 @@ import com.bravo.bakery.repository.CategoryRepository;
 import com.bravo.bakery.repository.ProductRepository;
 
 @RestController
-public class BakeryController {
+public class BakeryControllerV1 {
 
-	Logger log = Logger.getLogger(BakeryController.class);
+	Logger log = Logger.getLogger(BakeryControllerV1.class);
 
 	@Autowired
 	private CategoryRepository categoryRepository;
@@ -27,11 +28,19 @@ public class BakeryController {
 	@Autowired
 	private ProductRepository productRepository;
 
+	/**
+	 * V1 Get All Categories
+	 */
+
 	@GetMapping("/api/v1/category/all")
 	public List<CategoryEntity> getAllCategories() {
 		log.debug("getAllCategories");
 		return (List<CategoryEntity>) categoryRepository.findAll();
 	}
+
+	/**
+	 * V1 Get All Products
+	 */
 
 	@GetMapping("/api/v1/product/all")
 	public List<ProductEntity> getAllProducts() {
@@ -40,17 +49,17 @@ public class BakeryController {
 	}
 
 	/**
-	 * FIND CATEGORY
+	 * V1 FIND CATEGORY
 	 */
 	@GetMapping("/api/v1/category/{id}")
-	public CategoryEntity categoryFind(@PathVariable String id) {
+	public ResponseEntity<CategoryEntity> categoryFind(@PathVariable String id) {
 		log.debug("buscando categoria");
 		Long id_category = Long.parseLong(id);
-		return categoryRepository.findById(id_category).orElse(null);
+		return ResponseEntity.ok().body(categoryRepository.findById(id_category).orElse(null));
 	}
 
 	/**
-	 * CREATE/UPDATE CATEGORY
+	 * V1 CREATE/UPDATE CATEGORY
 	 */
 	@PostMapping("/api/v1/category")
 	public CategoryEntity categoryCreate(@RequestBody CategoryEntity category) {
@@ -60,7 +69,7 @@ public class BakeryController {
 	}
 
 	/**
-	 * DELETE CATEGORY
+	 * V1 DELETE CATEGORY
 	 */
 	@DeleteMapping("/api/v1/category/{id}")
 	public void categoryDelete(@PathVariable String id) {
@@ -70,7 +79,7 @@ public class BakeryController {
 	}
 
 	/**
-	 * FIND PRODUCT
+	 * V1 FIND PRODUCT
 	 */
 	@GetMapping("/api/v1/product/{id}")
 	public ProductEntity productFind(@PathVariable String id) {
@@ -80,7 +89,7 @@ public class BakeryController {
 	}
 
 	/**
-	 * CREATE/UPDATE PRODUCT
+	 * V1 CREATE/UPDATE PRODUCT
 	 */
 	@PostMapping("/api/v1/product")
 	public ProductEntity productCreate(@RequestBody ProductEntity product) {
@@ -90,7 +99,7 @@ public class BakeryController {
 	}
 
 	/**
-	 * DELETE PRODUCT
+	 * V1 DELETE PRODUCT
 	 */
 	@DeleteMapping("/api/v1/product/{id}")
 	public void productDelete(@PathVariable String id) {
@@ -98,4 +107,5 @@ public class BakeryController {
 		Long id_product = Long.parseLong(id);
 		productRepository.deleteById(id_product);
 	}
+
 }
