@@ -47,6 +47,7 @@ Bakery is very easy to launch from docker.
     ```console
     127.0.0.1:18080
     ```
+# New: Now with ssh auth
 
 ## Authors
 
